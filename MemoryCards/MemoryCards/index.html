@@ -4,10 +4,168 @@
     <title>Memory Cards</title>
     <script src="scripts/kinetic-v5.1.0.min.js"></script>
     <script src="scripts/raphael-min.js"></script>
+<<<<<<< HEAD
     <link href="styles/style.css" rel="stylesheet" />
 </head>
 <body>
     <div id="container"></div>
     <script src="scripts/main.js"></script>
+=======
+    <script src="scripts/Card.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+
+    <script>
+
+        var faces = (function () {
+
+            function loadImage(src) { // it is something like private method
+                var imageObj = new Image();
+                imageObj.src = src;
+                return imageObj;
+            }
+
+            return {
+                frontFaces: [loadImage("imgs/images.jpg")],
+                backFaces: [loadImage("imgs/Nimbus_terrafaux_mk.jpg")]
+            }
+
+        })();
+
+        var stage = new Kinetic.Stage({
+            container: 'container',
+            width: 800,
+            height: 600
+        });
+
+        var layer = new Kinetic.Layer(); // Create the canvas
+        layer.setWidth(800);
+        layer.setHeight(600);
+
+        var layerOffset = 10;
+
+
+
+        var rows = 4;
+        var cols = 4;
+        var cardOffset = 20;
+        var initialXOffset = (layer.getWidth() - cols * Card.DIMENSION.width - cols * cardOffset) / 2;
+        var initialYOffset = (layer.getHeight() - rows * Card.DIMENSION.height - rows * cardOffset) / 2;
+
+        function createCards() {
+
+            var arr = [];
+            for (var i = 0; i < rows; i++) {
+                for (var j = 0; j < cols; j++) {
+
+                    var pos = {
+                        x: initialXOffset + j * Card.DIMENSION.width + cardOffset * j,
+                        y: initialYOffset + i * Card.DIMENSION.height + cardOffset * i
+                    }
+
+                    arr.push(new Card(faces.frontFaces[0], faces.backFaces[0], pos));
+
+                }
+            }
+            return arr;
+        }
+
+        var cards = createCards();
+
+
+        (function initialize() {
+            var rect = new Kinetic.Rect({
+                x: layerOffset,
+                y: layerOffset,
+                width: layer.getWidth() - layerOffset * 2,
+                height: layer.getHeight() - layerOffset * 2,
+                fill: 'green',
+                stroke: 'black',
+                strokeWidth: 4
+            }); // Create table
+
+            layer.add(rect);
+
+            for (var i = 0; i < cards.length; i++) {
+                cards[i].draw(layer);
+            }
+        })();
+
+        var currentOpen = [];
+
+        layer.on('click', function (ev) {
+
+            var fx = ev.evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+            var fy = ev.evt.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+
+            for (var i = 0; i < cards.length; i++) {
+
+                if (cards[i].isInBounds(fx, fy)) {
+
+                    if (currentOpen.length < 2) { // Dont turn more than 2 cards 
+
+                        cards[i].setTurned();
+                        currentOpen.push(cards[i]);
+
+                    }
+
+                }
+
+            }
+
+            if (currentOpen.length == 2) {
+
+                setTimeout( // Turn the cards after half second
+                    function () {
+
+
+                        /* if (currentOpen[0].frontFaces == currentOpen[1].frontFaces) { // The cards are equal
+
+                             currentOpen[0].finish(); // finish it
+                             currentOpen[1].finish();
+
+
+                         } else */ {
+
+                            for (var i = 0; i < cards.length; i++) {
+
+                                cards[i].isTurned = false;
+
+                            }
+
+                            currentOpen = new Array();
+                        }
+
+                    }, 500);
+
+            } else {
+
+
+
+            }
+
+        });
+
+        var anim = new Kinetic.Animation(function (frame) {
+            for (var i = 0; i < cards.length; i++) {
+
+                cards[i].draw(layer);
+
+            }
+
+        }, layer);
+
+        anim.start();
+
+        stage.add(layer);
+    </script>
+>>>>>>> baeb32376866c35fbbefa17ba63095d40afe2991
 </body>
 </html>
