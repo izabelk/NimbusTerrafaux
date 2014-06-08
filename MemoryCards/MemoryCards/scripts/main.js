@@ -58,9 +58,11 @@ layer.on('click', function (ev) {
 
     var x = ev.evt.clientX;
     var y = ev.evt.clientY;
+    var fx = ev.evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+    var fy = ev.evt.clientY + document.body.scrollTop + document.documentElement.scrollTop;
 
     for (var i = 0; i < cards.length; i++) {
-        if (cards[i].isInBounds(x, y)) {
+        if (cards[i].isInBounds(fx, fy)) {
             cards[i].isTurned = !cards[i].isTurned;
         }
     }
