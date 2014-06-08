@@ -4,3 +4,9 @@ C:\Users\Nikola\Documents\GitHub\NimbusTerrafaux\MemoryCards\MemoryCards\bin\Mem
 C:\Users\Nikola\Documents\GitHub\NimbusTerrafaux\MemoryCards\MemoryCards\obj\Debug\MemoryCards.csprojResolveAssemblyReference.cache
 C:\Users\Nikola\Documents\GitHub\NimbusTerrafaux\MemoryCards\MemoryCards\obj\Debug\MemoryCards.dll
 C:\Users\Nikola\Documents\GitHub\NimbusTerrafaux\MemoryCards\MemoryCards\obj\Debug\MemoryCards.pdb
+E:\GitHubProjects\NimbusTerrafaux\MemoryCards\MemoryCards\bin\MemoryCards.dll.config
+E:\GitHubProjects\NimbusTerrafaux\MemoryCards\MemoryCards\bin\MemoryCards.dll
+E:\GitHubProjects\NimbusTerrafaux\MemoryCards\MemoryCards\bin\MemoryCards.pdb
+E:\GitHubProjects\NimbusTerrafaux\MemoryCards\MemoryCards\obj\Debug\MemoryCards.csprojResolveAssemblyReference.cache
+E:\GitHubProjects\NimbusTerrafaux\MemoryCards\MemoryCards\obj\Debug\MemoryCards.dll
+E:\GitHubProjects\NimbusTerrafaux\MemoryCards\MemoryCards\obj\Debug\MemoryCards.pdb
