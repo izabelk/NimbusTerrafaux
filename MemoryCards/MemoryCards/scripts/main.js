@@ -56,24 +56,31 @@ var current = [];
 // click on card
 layer.on('click', function (ev) {
 
-    var x = ev.evt.clientX;
-    var y = ev.evt.clientY;
     var fx = ev.evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
     var fy = ev.evt.clientY + document.body.scrollTop + document.documentElement.scrollTop;
 
     for (var i = 0; i < cards.length; i++) {
         if (cards[i].isInBounds(fx, fy)) {
+
             if (current.length < 2) {
+
                 cards[i].setTurned();
                 current.push(cards[i]);
+
             }
+
         }
     }
     if (current.length == 2) {
 
         setTimeout(function () {
 
-            if (current[0].backFaces == current[1].backFaces)
+            /*if (current[0].backFaces == current[1].backFaces) {
+
+                current[0].finish();
+                current[1].finish();
+
+            }*/
 
                 for (var i = 0; i < cards.length; i++) {
 

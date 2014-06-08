@@ -75,7 +75,15 @@ Card.prototype.draw = function (layer) {
 
     } else {
 
-        this.kineticImage.setImage(this.isTurned ? this.frontFace : this.backFace);
+        if (this.isFinished) {
+
+            this.kineticImage.setImage(this.frontFace);
+
+        } else {
+
+            this.kineticImage.setImage(this.isTurned ? this.frontFace : this.backFace);
+
+        }
 
     }
 }
