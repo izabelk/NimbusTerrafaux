@@ -1,15 +1,45 @@
-﻿function Card(frontFace, backFace, position) {
+﻿// card images
+var faces = (function () {
+
+    function loadImage(src) { // it is something like private method
+        var imageObj = new Image();
+        imageObj.src = src;
+        return imageObj;
+    }
+
+    return {
+        frontFaces: [loadImage("imgs/images.jpg")],
+        backFaces: [loadImage("imgs/Nimbus_terrafaux_mk.jpg")]
+    }
+
+})();
+
+function loadCardFaces(faces) {
+
+
+
+}
+
+function Card(frontFace, backFace, position) {
 
     this.frontFace = frontFace;
     this.backFace = backFace;
     this.position = position;
     this.isTurned = false;
-    this.kineticObj = undefined;
+    this.kineticImage = undefined;
     this.isFinished = false;
 
 }
 
 Card.DIMENSION = { width: 80, height: 100 }
+
+//var cardShape = new Kinetic.Rect({
+//    width: Card.DIMENSION.width,
+//    height: Card.DIMENSION.height,
+//    fill: 'none',
+//    stroke: 'blue',
+//    strokeWidth: 3
+//});
 
 Card.prototype.setTurned = function () {
 
@@ -28,8 +58,8 @@ Card.prototype.finish = function () {
 }
 
 Card.prototype.draw = function (layer) {
-    if (!this.kineticObj) {
-        this.kineticObj = new Kinetic.Image({
+    if (!this.kineticImage) {
+        this.kineticImage = new Kinetic.Image({
             x: this.position.x,
             y: this.position.y,
             image: this.isTurned ? this.frontFace : this.backFace,
@@ -37,11 +67,15 @@ Card.prototype.draw = function (layer) {
             height: Card.DIMENSION.height
         });
 
-        layer.add(this.kineticObj);
+        //cardShape.setX(this.position.x);
+        //cardShape.setY(this.position.y);
+
+        //layer.add(cardShape);
+        layer.add(this.kineticImage);
 
     } else {
 
-        this.kineticObj.setImage(this.isTurned ? this.frontFace : this.backFace);
+        this.kineticImage.setImage(this.isTurned ? this.frontFace : this.backFace);
 
     }
 }

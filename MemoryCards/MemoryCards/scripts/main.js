@@ -1,85 +1,14 @@
-﻿var faces = (function () {
-
-    function loadImage(src) { // it is something like private method
-        var imageObj = new Image();
-        imageObj.src = src;
-        return imageObj;
-    }
-
-    return {
-        frontFaces: [loadImage("imgs/images.jpg")],
-        backFaces: [loadImage("imgs/Nimbus_terrafaux_mk.jpg")]
-    }
-
-})();
-
-function loadCardFaces(faces) {
-
-
-
-}
-
-function Card(frontFace, backFace, position) {
-
-    this.frontFace = frontFace;
-    this.backFace = backFace;
-    this.position = position;
-    this.isTurned = false;
-    this.kineticObj = undefined;
-
-}
-Card.DIMENSION = { width: 80, height: 100 }
-
-Card.prototype.draw = function (layer) {
-    if (!this.kineticObj) {
-        this.kineticObj = new Kinetic.Image({
-            x: this.position.x,
-            y: this.position.y,
-            image: this.isTurned ? this.frontFace : this.backFace,
-            width: Card.DIMENSION.width,
-            height: Card.DIMENSION.height
-        });
-
-        layer.add(this.kineticObj);
-
-    } else {
-
-        this.kineticObj.setImage(this.isTurned ? this.frontFace : this.backFace);
-
-    }
-}
-
-Card.prototype.isInBounds = function (x, y) {
-
-    function inRange(range, comp) {
-        return range.low < comp && comp < range.high;
-    }
-
-    return inRange({
-        low: this.position.x,
-        high: this.position.x + Card.DIMENSION.width
-    }, x)
-        &&
-        inRange({
-            low: this.position.y,
-            high: this.position.y + Card.DIMENSION.height
-        }, y);
-
-}
-
-var stage = new Kinetic.Stage({
+﻿var stage = new Kinetic.Stage({
     container: 'container',
     width: 800,
     height: 600
 });
 
-var layer = new Kinetic.Layer(); // Create the canvas
+// create the canvas
+var layer = new Kinetic.Layer();
 layer.setWidth(800);
 layer.setHeight(600);
-
 var layerOffset = 10;
-
-
 
 var rows = 4;
 var cols = 4;
@@ -105,7 +34,7 @@ function createCards() {
 
 var cards = createCards();
 
-
+// draw field
 (function initialize() {
     var rect = new Kinetic.Rect({
         x: layerOffset,
@@ -124,27 +53,24 @@ var cards = createCards();
     }
 })();
 
+// click on card
 layer.on('click', function (ev) {
 
     var x = ev.evt.clientX;
     var y = ev.evt.clientY;
-    var fx = ev.evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-    var fy = ev.evt.clientY + document.body.scrollTop + document.documentElement.scrollTop;
 
     for (var i = 0; i < cards.length; i++) {
-        if (cards[i].isInBounds(fx, fy)) {
+        if (cards[i].isInBounds(x, y)) {
             cards[i].isTurned = !cards[i].isTurned;
         }
     }
-
-
 });
 
+// animation frame
 var anim = new Kinetic.Animation(function (frame) {
     for (var i = 0; i < cards.length; i++) {
 
         cards[i].draw(layer);
-
     }
 
 }, layer);
