@@ -1,4 +1,6 @@
-﻿// card images
+﻿/// <reference path="_references.js" />
+
+// card images
 var faces = (function () {
 
     function loadImage(src) { // it is something like private method
@@ -33,13 +35,13 @@ function Card(frontFace, backFace, position) {
 
 Card.DIMENSION = { width: 80, height: 100 }
 
-//var cardShape = new Kinetic.Rect({
-//    width: Card.DIMENSION.width,
-//    height: Card.DIMENSION.height,
-//    fill: 'none',
-//    stroke: 'blue',
-//    strokeWidth: 3
-//});
+var cardShape = new Kinetic.Rect({
+    width: Card.DIMENSION.width,
+    height: Card.DIMENSION.height,
+    fill: 'none',
+    stroke: 'blue',
+    strokeWidth: 3
+});
 
 Card.prototype.setTurned = function () {
 
@@ -67,10 +69,10 @@ Card.prototype.draw = function (layer) {
             height: Card.DIMENSION.height
         });
 
-        //cardShape.setX(this.position.x);
-        //cardShape.setY(this.position.y);
+        cardShape.setX(this.position.x);
+        cardShape.setY(this.position.y);
 
-        //layer.add(cardShape);
+        layer.add(cardShape);
         layer.add(this.kineticImage);
 
     } else {

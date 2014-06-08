@@ -1,4 +1,6 @@
-﻿var stage = new Kinetic.Stage({
+﻿/// <reference path="_references.js" />
+
+var stage = new Kinetic.Stage({
     container: 'container',
     width: 800,
     height: 600
