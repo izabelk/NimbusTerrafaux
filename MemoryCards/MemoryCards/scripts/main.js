@@ -14,9 +14,13 @@ var layerOffset = 10;
 
 var rows = 4;
 var cols = 4;
-var cardOffset = 20;
-var initialXOffset = (layer.getWidth() - cols * Card.DIMENSION.width - cols * cardOffset) / 2;
-var initialYOffset = (layer.getHeight() - rows * Card.DIMENSION.height - rows * cardOffset) / 2; // Just for clarity
+var cardOffset = 10;
+// if we want cards to be floated left
+var initialXOffset = (cardOffset + layerOffset) * 2;
+var initialYOffset = (cardOffset + layerOffset) * 2;
+// if we want cards to be centered
+// var initialXOffset = (layer.getWidth() - cols * Card.DIMENSION.width - cols * cardOffset) / 2;
+// var initialYOffset = (layer.getHeight() - rows * Card.DIMENSION.height - rows * cardOffset) / 2;
 
 function createCards() {
 
@@ -92,7 +96,7 @@ layer.on('click', function (ev) {
 
             current = new Array();
 
-        }, 500);
+        }, 100);
 
     }
 });

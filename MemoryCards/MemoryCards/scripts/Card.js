@@ -18,8 +18,6 @@ var faces = (function () {
 
 function loadCardFaces(faces) {
 
-
-
 }
 
 function Card(frontFace, backFace, position) {
@@ -34,15 +32,8 @@ function Card(frontFace, backFace, position) {
 
 }
 
-Card.DIMENSION = { width: 80, height: 100 }
-
-var cardShape = new Kinetic.Rect({
-    width: Card.DIMENSION.width,
-    height: Card.DIMENSION.height,
-    fill: 'none',
-    stroke: 'blue',
-    strokeWidth: 3
-});
+Card.DIMENSION = { width: 100, height: 100 };
+var imageDimension = { width: 80, height: 80 };
 
 Card.prototype.setTurned = function () {
 
@@ -64,11 +55,11 @@ Card.prototype.draw = function (layer) {
     if (!this.kineticImage) {
 
         this.kineticImage = new Kinetic.Image({
-            x: this.position.x,
-            y: this.position.y,
+            x: this.position.x + ((Card.DIMENSION.width - imageDimension.width) / 2),
+            y: this.position.y + ((Card.DIMENSION.height - imageDimension.height) / 2),
             image: this.isTurned ? this.frontFace : this.backFace,
-            width: Card.DIMENSION.width,
-            height: Card.DIMENSION.height,
+            width: imageDimension.width,
+            height: imageDimension.height,
         });
 
         this.cardShapeKineticObj = new Kinetic.Rect({
@@ -76,9 +67,10 @@ Card.prototype.draw = function (layer) {
             y: this.position.y,
             width: Card.DIMENSION.width,
             height: Card.DIMENSION.height,
-            fill: 'none',
-            stroke: 'blue',
-            strokeWidth: 3
+            fill: 'rgba(79, 184, 253, 0.4)',
+            stroke: 'rgb(16, 80, 121)',
+            strokeWidth: 2,
+            cornerRadius: 5
         });
 
         layer.add(this.cardShapeKineticObj);
