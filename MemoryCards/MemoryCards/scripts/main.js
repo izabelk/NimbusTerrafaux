@@ -54,7 +54,7 @@ var cards = createCards();
         cards[i].draw(layer);
     }
 })();
-
+var current = [];
 // click on card
 layer.on('click', function (ev) {
 
@@ -65,8 +65,28 @@ layer.on('click', function (ev) {
 
     for (var i = 0; i < cards.length; i++) {
         if (cards[i].isInBounds(fx, fy)) {
-            cards[i].isTurned = !cards[i].isTurned;
+            if (current.length < 2) {
+                cards[i].setTurned();
+                current.push(cards[i]);
+            }
         }
+    }
+    if (current.length == 2) {
+
+        setTimeout(function () {
+
+            if (current[0].backFaces == current[1].backFaces)
+
+                for (var i = 0; i < cards.length; i++) {
+
+                    cards[i].isTurned = false;
+
+                }
+
+            current = new Array();
+
+        }, 500);
+
     }
 });
 
