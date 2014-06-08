@@ -25,8 +25,8 @@ var initialYOffset = (cardOffset + layerOffset) * 2;
 function createCards() {
 
     var arr = [];
-    for (var i = 0; i < 4; i++) {
-        for (var j = 0; j < 4; j++) {
+    for (var i = 0; i < 5; i++) {
+        for (var j = 0; j < 5; j++) {
 
             var pos = {
                 x: initialXOffset + j * Card.DIMENSION.width + cardOffset * j,
@@ -47,7 +47,7 @@ var cards = createCards();
         y: layerOffset,
         width: layer.getWidth() - layerOffset * 2,
         height: layer.getHeight() - layerOffset * 2,
-        fill: 'green',
+        fill: 'lightblue',
         stroke: 'black',
         strokeWidth: 4
     }); // Create table
@@ -58,7 +58,9 @@ var cards = createCards();
         cards[i].draw(layer);
     }
 })();
+
 var current = [];
+
 // click on card
 layer.on('click', function (ev) {
 
@@ -74,9 +76,9 @@ layer.on('click', function (ev) {
                 current.push(cards[i]);
                 
             }
-
         }
     }
+
     if (current.length == 2) {
 
         setTimeout(function () {
