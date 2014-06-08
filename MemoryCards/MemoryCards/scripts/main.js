@@ -68,7 +68,7 @@ layer.on('click', function (ev) {
 
                 cards[i].setTurned();
                 current.push(cards[i]);
-
+                
             }
 
         }
