@@ -17,7 +17,6 @@ layerOfGame.setWidth(800);
 layerOfGame.setHeight(600);
 
 var layerOffset = 10;
-
 var rows = 4;
 var cols = 4;
 var cardOffset = 10;
@@ -28,23 +27,42 @@ var initialYOffset = (cardOffset + layerOffset) * 2;
 // var initialXOffset = (layerOfGame.getWidth() - cols * Card.DIMENSION.width - cols * cardOffset) / 2;
 // var initialYOffset = (layerOfGame.getHeight() - rows * Card.DIMENSION.height - rows * cardOffset) / 2;
 
-function createCards() {
+function createCards(rows, cols) {
 
-    var arr = [];
-    for (var i = 0; i < 5; i++) {
-        for (var j = 0; j < 5; j++) {
-
+    var cards = [],
+        numberOfCouples = (rows * cols) / 2,
+        cardFronts = getCurrentGameCardFronts(numberOfCouples);
+    for (var i = 0; i < rows; i++) {
+        for (var j = 0; j < cols; j++) {
             var pos = {
                 x: initialXOffset + j * Card.DIMENSION.width + cardOffset * j,
                 y: initialYOffset + i * Card.DIMENSION.height + cardOffset * i
             }
-            arr.push(new Card(faces.frontFaces[0], faces.backFaces[0], pos));
+            var cardNumber = i * cols + j,
+                id = cardNumber % numberOfCouples;
+            var faces = loadCardFaces(cardFronts[id], 'imgs/Nimbus_terrafaux_mk.jpg');
+            cards.push(new Card(faces.frontFace, faces.backFace, pos, id));            
         }
     }
-    return arr;
+    shuffle(cards);
+    return cards;
 }
 
-var cards = createCards();
+function shuffle(array) {
+    var length = array.length;
+    for (var i = 0; i < length; i++) {
+        var pos = getRandomInt(0, length);
+        swap(pos);
+    }
+
+    function swap(pos) {
+        var value = array[0];
+        array[0] = array[pos];
+        array[pos] = value;
+    }
+}
+
+var cards = createCards(rows, cols);
 
 (function initializeMenu() {
 
@@ -200,44 +218,35 @@ function initializeField() {
 var current = [];
 
 // click on card
+<<<<<<< HEAD
 layerOfGame.on('click', function (ev) {
 
+=======
+layer.on('click', function (ev) {
+>>>>>>> 7f3f5358d63aa67308d78713478d5efc57f93c30
     var fx = ev.evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
     var fy = ev.evt.clientY + document.body.scrollTop + document.documentElement.scrollTop;
 
     for (var i = 0; i < cards.length; i++) {
         if (cards[i].isInBounds(fx, fy)) {
-
             if (current.length < 2) {
-
                 cards[i].setTurned();
-                current.push(cards[i]);
-                
+                current.push(cards[i]);                
             }
         }
     }
 
     if (current.length == 2) {
-
         setTimeout(function () {
-
-            /*if (current[0].backFaces == current[1].backFaces) {
-
+            if (current[0].id == current[1].id) {
                 current[0].finish();
                 current[1].finish();
-
-            }*/
-
-                for (var i = 0; i < cards.length; i++) {
-
-                    cards[i].isTurned = false;
-
-                }
-
+            }
+            for (var i = 0; i < cards.length; i++) {
+                cards[i].isTurned = false;
+            }
             current = new Array();
-
         }, 100);
-
     }
 });
 
