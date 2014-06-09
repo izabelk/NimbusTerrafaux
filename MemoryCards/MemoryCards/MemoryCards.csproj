@@ -117,8 +117,7 @@
     <Content Include="imgs\cardFronts\Uganda.ico" />
     <Content Include="imgs\cardFronts\Uruguay.ico" />
     <Content Include="imgs\cardFronts\Uzbekistan.ico" />
-    <Content Include="imgs\images.jpg" />
-    <Content Include="imgs\Nimbus_terrafaux_mk.jpg" />
+    <Content Include="imgs\cardBack\question.png" />
     <Content Include="index.html" />
     <Content Include="scripts\Card.js" />
     <Content Include="scripts\highscore.js" />

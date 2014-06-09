@@ -148,10 +148,10 @@ Card.prototype.draw = function (layer) {
             y: this.position.y,
             width: Card.DIMENSION.width,
             height: Card.DIMENSION.height,
-            fill: 'rgba(79, 184, 253, 0.4)',
-            stroke: 'rgb(16, 80, 121)',
+            fill: 'rgba(79, 184, 253, .4)',
+            stroke: 'rgba(189, 229, 255, .7)',
             strokeWidth: 2,
-            cornerRadius: 5
+            cornerRadius: 0
         });
 
         layer.add(this.cardShapeKineticObj);
@@ -203,7 +203,7 @@ function createCards(rows, cols) {
             }
             var cardNumber = i * cols + j,
                 id = cardNumber % numberOfCouples;
-            var faces = loadCardFaces(cardFronts[id], 'imgs/Nimbus_terrafaux_mk.jpg');
+            var faces = loadCardFaces(cardFronts[id], 'imgs/cardBack/question.png');
             cards.push(new Card(faces.frontFace, faces.backFace, pos, id));
         }
     }
