@@ -66,8 +66,11 @@ function shuffleFrontImages(array) {
 }
 
 var cards = createCards(rows, cols);
+var currentScore = 0;
+var win = false;
 
-(function initializeMenu() {
+
+function initializeMenu() {
 
     var rect = new Kinetic.Rect({
         x: layerOffset,
@@ -206,7 +209,8 @@ var cards = createCards(rows, cols);
     layerOfMenu.add(highScoresText);
     layerOfMenu.add(invisibleRectScores);
 
-})();
+};
+initializeMenu();
 
 // draw field
 function initializeField() {
@@ -223,6 +227,9 @@ function initializeField() {
 
     layerOfGame.add(rect);
     //layerOfGame.draw();
+
+    currentScore = 0;
+    win = false;
 
     for (var i = 0; i < cards.length; i++) {
         cards[i].draw(layerOfGame);
@@ -254,6 +261,7 @@ layerOfGame.on('click', function (ev) {
             if (current[0].id == current[1].id) {
                 current[0].finish();
                 current[1].finish();
+                currentScore += 2;
             }
 
             for (var i = 0; i < cards.length; i++) {
@@ -268,9 +276,14 @@ layerOfGame.on('click', function (ev) {
 // animation frame
 var anim = new Kinetic.Animation(function (frame) {
 
-    if (isWin()) {
-        
-        // TODO: stop the animation
+    if (win) {
+
+        anim.stop();
+        highscore.addUser(prompt('You just get ' + currentScore + ' scores. Enter your name:'), currentScore);
+        layerOfGame.visible(false);
+        layerOfMenu.visible(true);
+        layerOfMenu.draw();
+        return;
     }
 
     for (var i = 0; i < cards.length; i++) {
@@ -278,13 +291,15 @@ var anim = new Kinetic.Animation(function (frame) {
         cards[i].draw(layerOfGame);
     }
 
+    win = isWin();
+
 }, layerOfGame);
 
 var isWin = function () {
 
     for (var i = 0; i < cards.length; i++) {
 
-        if (cards[i].isFinished === false) {
+        if (!cards[i].isFinished) {
 
             return false;
         }
@@ -292,8 +307,6 @@ var isWin = function () {
 
     return true;
 }
-
-//anim.start();
 
 stage.add(layerOfMenu);
 stage.add(layerOfGame);
