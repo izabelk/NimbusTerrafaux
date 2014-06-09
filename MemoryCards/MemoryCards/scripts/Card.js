@@ -102,7 +102,7 @@ function loadCardFaces(frontFace, backFace) {
 
 }
 
-function Card(frontFace, backFace, position) {
+function Card(frontFace, backFace, position, id) {
 
     this.frontFace = frontFace;
     this.backFace = backFace;
@@ -111,7 +111,7 @@ function Card(frontFace, backFace, position) {
     this.kineticImage = undefined;
     this.cardShapeKineticObj = undefined;
     this.isFinished = false;
-
+    this.id = id;
 }
 
 Card.DIMENSION = { width: 100, height: 100 };

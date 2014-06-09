@@ -11,7 +11,6 @@ var layer = new Kinetic.Layer();
 layer.setWidth(800);
 layer.setHeight(600);
 var layerOffset = 10;
-
 var rows = 4;
 var cols = 4;
 var cardOffset = 10;
@@ -33,17 +32,29 @@ function createCards(rows, cols) {
                 x: initialXOffset + j * Card.DIMENSION.width + cardOffset * j,
                 y: initialYOffset + i * Card.DIMENSION.height + cardOffset * i
             }
-            var cardNumber = i * cols + j;
-            var faces = loadCardFaces(cardFronts[cardNumber % numberOfCouples], 'imgs/Nimbus_terrafaux_mk.jpg');
-            cards.push(new Card(faces.frontFace, faces.backFace, pos));
+            var cardNumber = i * cols + j,
+                id = cardNumber % numberOfCouples;
+            var faces = loadCardFaces(cardFronts[id], 'imgs/Nimbus_terrafaux_mk.jpg');
+            cards.push(new Card(faces.frontFace, faces.backFace, pos, id));            
         }
     }
     shuffle(cards);
     return cards;
 }
 
-function shuffle(array) { }
+function shuffle(array) {
+    var length = array.length;
+    for (var i = 0; i < length; i++) {
+        var pos = getRandomInt(0, length);
+        swap(pos);
+    }
 
+    function swap(pos) {
+        var value = array[0];
+        array[0] = array[pos];
+        array[pos] = value;
+    }
+}
 
 var cards = createCards(rows, cols);
 
@@ -70,43 +81,29 @@ var current = [];
 
 // click on card
 layer.on('click', function (ev) {
-
     var fx = ev.evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
     var fy = ev.evt.clientY + document.body.scrollTop + document.documentElement.scrollTop;
 
     for (var i = 0; i < cards.length; i++) {
         if (cards[i].isInBounds(fx, fy)) {
-
             if (current.length < 2) {
-
                 cards[i].setTurned();
-                current.push(cards[i]);
-                
+                current.push(cards[i]);                
             }
         }
     }
 
     if (current.length == 2) {
-
         setTimeout(function () {
-
-            /*if (current[0].backFaces == current[1].backFaces) {
-
+            if (current[0].id == current[1].id) {
                 current[0].finish();
                 current[1].finish();
-
-            }*/
-
-                for (var i = 0; i < cards.length; i++) {
-
-                    cards[i].isTurned = false;
-
-                }
-
+            }
+            for (var i = 0; i < cards.length; i++) {
+                cards[i].isTurned = false;
+            }
             current = new Array();
-
         }, 100);
-
     }
 });
 
