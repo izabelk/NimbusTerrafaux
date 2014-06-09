@@ -67,7 +67,7 @@ var highscore = {
             var name = users[i].name;
             var score = users[i].score;
 
-            listItem.innerText = name + ' - ' + score + ' score';
+            listItem.innerText = name + ' - ' + score + ' scores';
             orderedList.appendChild(listItem);
         }
 
