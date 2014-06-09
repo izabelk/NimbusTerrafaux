@@ -44,11 +44,11 @@ function createCards(rows, cols) {
             cards.push(new Card(faces.frontFace, faces.backFace, pos, id));            
         }
     }
-    shuffle(cards);
+    shuffleFrontImages(cards);
     return cards;
 }
 
-function shuffle(array) {
+function shuffleFrontImages(array) {
     var length = array.length;
     for (var i = 0; i < length; i++) {
         var pos = getRandomInt(0, length);
@@ -56,9 +56,12 @@ function shuffle(array) {
     }
 
     function swap(pos) {
-        var value = array[0];
-        array[0] = array[pos];
-        array[pos] = value;
+        var img = array[0].frontFace;
+        array[0].frontFace = array[pos].frontFace;
+        array[pos].frontFace = img;
+        var id = array[0].id;
+        array[0].id = array[pos].id;
+        array[pos].id = id;
     }
 }
 
