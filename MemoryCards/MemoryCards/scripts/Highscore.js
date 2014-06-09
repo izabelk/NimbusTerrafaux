@@ -40,8 +40,11 @@ var highscore = {
 
         // set position of the <ol> ranking
         orderedList.style.position = 'absolute';
-        orderedList.style.top = '50px';
-        orderedList.style.left = '100px';
+        orderedList.style.top = '350px';
+        orderedList.style.left = '250px';
+        orderedList.style.color = '#3538FF';
+        orderedList.style.font = 'italic 28px Consolas';
+
         var users = [];
 
         // push all users in array
