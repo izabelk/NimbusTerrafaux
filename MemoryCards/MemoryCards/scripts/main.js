@@ -11,7 +11,7 @@ var layerOfMenu = new Kinetic.Layer();
 layerOfMenu.setWidth(800);
 layerOfMenu.setHeight(600);
 
-// create the canvas
+// creates the canvas
 var layerOfGame = new Kinetic.Layer();
 layerOfGame.setWidth(800);
 layerOfGame.setHeight(600);
@@ -44,11 +44,11 @@ function createCards(rows, cols) {
             cards.push(new Card(faces.frontFace, faces.backFace, pos, id));            
         }
     }
-    shuffle(cards);
+    shuffleFrontImages(cards);
     return cards;
 }
 
-function shuffle(array) {
+function shuffleFrontImages(array) {
     var length = array.length;
     for (var i = 0; i < length; i++) {
         var pos = getRandomInt(0, length);
@@ -56,9 +56,12 @@ function shuffle(array) {
     }
 
     function swap(pos) {
-        var value = array[0];
-        array[0] = array[pos];
-        array[pos] = value;
+        var img = array[0].frontFace;
+        array[0].frontFace = array[pos].frontFace;
+        array[pos].frontFace = img;
+        var id = array[0].id;
+        array[0].id = array[pos].id;
+        array[pos].id = id;
     }
 }
 
@@ -172,6 +175,17 @@ var cards = createCards(rows, cols);
         cornerRadius: 10
     });
 
+    invisibleRectScores.on('click', function () {
+        var ranking = document.querySelector('ol');
+
+        if (ranking === null) {
+            highscore.show();
+        }
+        else {
+            ranking.parentNode.removeChild(ranking);
+        }       
+    });
+
     invisibleRectScores.on('mouseover', function () {
         highScoresRectVisible.fill('#CCFFFF');
         layerOfMenu.draw();
@@ -241,7 +255,7 @@ layerOfGame.on('click', function (ev) {
                 cards[i].isTurned = false;
             }
             current = new Array();
-        }, 100);
+        }, 500);
     }
 });
 

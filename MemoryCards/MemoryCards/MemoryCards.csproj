@@ -106,7 +106,6 @@
     <Content Include="imgs\cardFronts\Portugal.ico" />
     <Content Include="imgs\cardFronts\Puerto-rico.ico" />
     <Content Include="imgs\cardFronts\Qatar.ico" />
-    <Content Include="imgs\cardFronts\Reunion.ico" />
     <Content Include="imgs\cardFronts\Romania.ico" />
     <Content Include="imgs\cardFronts\Russia.ico" />
     <Content Include="imgs\cardFronts\Rwanda.ico" />
@@ -122,9 +121,11 @@
     <Content Include="imgs\Nimbus_terrafaux_mk.jpg" />
     <Content Include="index.html" />
     <Content Include="scripts\Card.js" />
+    <Content Include="scripts\highscore.js" />
     <Content Include="scripts\kinetic-v5.1.0.min.js" />
     <Content Include="scripts\main.js" />
     <Content Include="scripts\raphael-min.js" />
+    <None Include="scripts\_references.js" />
     <Content Include="styles\style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
