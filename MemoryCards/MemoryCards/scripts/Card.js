@@ -50,7 +50,6 @@ var cardFronts = [
 'imgs/cardFronts/Portugal.ico',
 'imgs/cardFronts/Puerto-rico.ico',
 'imgs/cardFronts/Qatar.ico',
-'imgs/cardFronts/Reunion.ico',
 'imgs/cardFronts/Romania.ico',
 'imgs/cardFronts/Russia.ico',
 'imgs/cardFronts/Rwanda.ico',
