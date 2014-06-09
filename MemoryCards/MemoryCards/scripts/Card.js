@@ -189,3 +189,42 @@ Card.prototype.isInBounds = function (x, y) {
         }, y);
 
 }
+
+function createCards(rows, cols) {
+
+    var cards = [],
+        numberOfCouples = (rows * cols) / 2,
+        cardFronts = getCurrentGameCardFronts(numberOfCouples);
+    for (var i = 0; i < rows; i++) {
+        for (var j = 0; j < cols; j++) {
+            var pos = {
+                x: initialXOffset + j * Card.DIMENSION.width + cardOffset * j,
+                y: initialYOffset + i * Card.DIMENSION.height + cardOffset * i
+            }
+            var cardNumber = i * cols + j,
+                id = cardNumber % numberOfCouples;
+            var faces = loadCardFaces(cardFronts[id], 'imgs/Nimbus_terrafaux_mk.jpg');
+            cards.push(new Card(faces.frontFace, faces.backFace, pos, id));
+        }
+    }
+    shuffleFrontImages(cards);
+    return cards;
+}
+
+
+function shuffleFrontImages(array) {
+    var length = array.length;
+    for (var i = 0; i < length; i++) {
+        var pos = getRandomInt(0, length);
+        swap(pos);
+    }
+
+    function swap(pos) {
+        var img = array[0].frontFace;
+        array[0].frontFace = array[pos].frontFace;
+        array[pos].frontFace = img;
+        var id = array[0].id;
+        array[0].id = array[pos].id;
+        array[pos].id = id;
+    }
+}
