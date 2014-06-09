@@ -234,23 +234,29 @@ layerOfGame.on('click', function (ev) {
     var fy = ev.evt.clientY + document.body.scrollTop + document.documentElement.scrollTop;
 
     for (var i = 0; i < cards.length; i++) {
-        if (cards[i].isInBounds(fx, fy)) {
-            if (current.length < 2) {
-                cards[i].setTurned();
-                current.push(cards[i]);                
-            }
+
+        if (!cards[i].isTurned &&
+            !cards[i].isFinished &&
+            cards[i].isInBounds(fx, fy)) {
+
+            cards[i].setTurned();
+            current.push(cards[i]);
+            break;
         }
     }
 
     if (current.length == 2) {
         setTimeout(function () {
+
             if (current[0].id == current[1].id) {
                 current[0].finish();
                 current[1].finish();
             }
+
             for (var i = 0; i < cards.length; i++) {
                 cards[i].isTurned = false;
             }
+
             current = new Array();
         }, 500);
     }
@@ -258,12 +264,31 @@ layerOfGame.on('click', function (ev) {
 
 // animation frame
 var anim = new Kinetic.Animation(function (frame) {
+
+    if (isWin()) {
+        
+        // TODO: stop the animation
+    }
+
     for (var i = 0; i < cards.length; i++) {
 
         cards[i].draw(layerOfGame);
     }
 
 }, layerOfGame);
+
+var isWin = function () {
+
+    for (var i = 0; i < cards.length; i++) {
+
+        if (cards[i].isFinished === false) {
+
+            return false;
+        }
+    }
+
+    return true;
+}
 
 //anim.start();
 
