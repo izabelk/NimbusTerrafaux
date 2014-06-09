@@ -22,23 +22,30 @@ var initialYOffset = (cardOffset + layerOffset) * 2;
 // var initialXOffset = (layer.getWidth() - cols * Card.DIMENSION.width - cols * cardOffset) / 2;
 // var initialYOffset = (layer.getHeight() - rows * Card.DIMENSION.height - rows * cardOffset) / 2;
 
-function createCards() {
+function createCards(rows, cols) {
 
-    var arr = [];
-    for (var i = 0; i < 5; i++) {
-        for (var j = 0; j < 5; j++) {
-
+    var cards = [],
+        numberOfCouples = (rows * cols) / 2,
+        cardFronts = getCurrentGameCardFronts(numberOfCouples);
+    for (var i = 0; i < rows; i++) {
+        for (var j = 0; j < cols; j++) {
             var pos = {
                 x: initialXOffset + j * Card.DIMENSION.width + cardOffset * j,
                 y: initialYOffset + i * Card.DIMENSION.height + cardOffset * i
             }
-            arr.push(new Card(faces.frontFaces[0], faces.backFaces[0], pos));
+            var cardNumber = i * cols + j;
+            var faces = loadCardFaces(cardFronts[cardNumber % numberOfCouples], 'imgs/Nimbus_terrafaux_mk.jpg');
+            cards.push(new Card(faces.frontFace, faces.backFace, pos));
         }
     }
-    return arr;
+    shuffle(cards);
+    return cards;
 }
 
-var cards = createCards();
+function shuffle(array) { }
+
+
+var cards = createCards(rows, cols);
 
 // draw field
 (function initialize() {

@@ -1,7 +1,93 @@
 ﻿/// <reference path="_references.js" />
 
 // card images
-var faces = (function () {
+var cardFronts = [
+'imgs/cardFronts/Aland.ico',
+'imgs/cardFronts/Andorra.ico',
+'imgs/cardFronts/Bahrain.ico',
+'imgs/cardFronts/Bangladesh.ico',
+'imgs/cardFronts/Barbados.ico',
+'imgs/cardFronts/Bonaire.ico',
+'imgs/cardFronts/Brazil.ico',
+'imgs/cardFronts/Bulgaria.ico',
+'imgs/cardFronts/Canada.ico',
+'imgs/cardFronts/Cascadia.ico',
+'imgs/cardFronts/Denmark.ico',
+'imgs/cardFronts/Ecuador.ico',
+'imgs/cardFronts/Egypt.ico',
+'imgs/cardFronts/England.ico',
+'imgs/cardFronts/Faroe-islands.ico',
+'imgs/cardFronts/Finland.ico',
+'imgs/cardFronts/France.ico',
+'imgs/cardFronts/Guernsey.ico',
+'imgs/cardFronts/Guinea.ico',
+'imgs/cardFronts/Guyana.ico',
+'imgs/cardFronts/Haiti.ico',
+'imgs/cardFronts/Honduras.ico',
+'imgs/cardFronts/Hungary.ico',
+'imgs/cardFronts/Iceland.ico',
+'imgs/cardFronts/India.ico',
+'imgs/cardFronts/Indonesia.ico',
+'imgs/cardFronts/Iran.ico',
+'imgs/cardFronts/Jamaica.ico',
+'imgs/cardFronts/Japan.ico',
+'imgs/cardFronts/Jersey.ico',
+'imgs/cardFronts/Jordan.ico',
+'imgs/cardFronts/Kazakhstan.ico',
+'imgs/cardFronts/Laos.ico',
+'imgs/cardFronts/Latvia.ico',
+'imgs/cardFronts/Lebanon.ico',
+'imgs/cardFronts/Lesotho.ico',
+'imgs/cardFronts/Liechtenstein.ico',
+'imgs/cardFronts/Mexico.ico',
+'imgs/cardFronts/Moldova.ico',
+'imgs/cardFronts/Mongolia.ico',
+'imgs/cardFronts/Montenegro.ico',
+'imgs/cardFronts/Myanmar.ico',
+'imgs/cardFronts/Namibia.ico',
+'imgs/cardFronts/Philippines.ico',
+'imgs/cardFronts/Pitcairn.ico',
+'imgs/cardFronts/Portugal.ico',
+'imgs/cardFronts/Puerto-rico.ico',
+'imgs/cardFronts/Qatar.ico',
+'imgs/cardFronts/Reunion.ico',
+'imgs/cardFronts/Romania.ico',
+'imgs/cardFronts/Russia.ico',
+'imgs/cardFronts/Rwanda.ico',
+'imgs/cardFronts/Scotland.ico',
+'imgs/cardFronts/Thailand.ico',
+'imgs/cardFronts/Togo.ico',
+'imgs/cardFronts/Turkey.ico',
+'imgs/cardFronts/Turkmenistan.ico',
+'imgs/cardFronts/Uganda.ico',
+'imgs/cardFronts/Uruguay.ico',
+'imgs/cardFronts/Uzbekistan.ico'
+];
+
+function getCurrentGameCardFronts(n) {
+    var currentCardFronts = [],
+        used = [];
+    for (var i = 0; i < n; i++) {
+        var pos = getRandomIntNotUsed(0, cardFronts.length, used);
+        currentCardFronts.push(cardFronts[pos]);
+    }
+    return currentCardFronts;
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function getRandomIntNotUsed(min, max, used) {
+    var i = getRandomInt(min, max);
+    while (used.indexOf(i) != -1) {
+        i = getRandomInt(min, max);
+    }
+    used.push(i);
+    return i;
+}
+
+function loadCardFaces(frontFace, backFace) {
 
     function loadImage(src) { // it is something like private method
         var imageObj = new Image();
@@ -10,13 +96,9 @@ var faces = (function () {
     }
 
     return {
-        frontFaces: [loadImage("imgs/images.jpg")],
-        backFaces: [loadImage("imgs/Nimbus_terrafaux_mk.jpg")]
+        frontFace: loadImage(frontFace),
+        backFace: loadImage(backFace)
     }
-
-})();
-
-function loadCardFaces(faces) {
 
 }
 
