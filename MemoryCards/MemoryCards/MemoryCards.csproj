@@ -122,9 +122,11 @@
     <Content Include="imgs\Nimbus_terrafaux_mk.jpg" />
     <Content Include="index.html" />
     <Content Include="scripts\Card.js" />
+    <Content Include="scripts\highscore.js" />
     <Content Include="scripts\kinetic-v5.1.0.min.js" />
     <Content Include="scripts\main.js" />
     <Content Include="scripts\raphael-min.js" />
+    <None Include="scripts\_references.js" />
     <Content Include="styles\style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
