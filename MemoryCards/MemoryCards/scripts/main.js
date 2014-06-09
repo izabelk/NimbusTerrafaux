@@ -142,6 +142,9 @@ var cards = createCards();
         fill: '#3538FF'
     });
 
+
+
+
     var invisibleRectScores = new Kinetic.Rect({
         x: 250,
         y: 290,
