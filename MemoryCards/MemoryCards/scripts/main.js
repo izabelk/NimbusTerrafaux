@@ -81,7 +81,7 @@ var cards = createCards(rows, cols);
     var title = new Kinetic.Text({
         text: 'Memory Cards',
         fontFamily: 'French Script MT',
-        fontSize: 60,
+        fontSize: 80,
         x: 240,
         y: 50,
         fill: '#3538FF'
@@ -91,8 +91,8 @@ var cards = createCards(rows, cols);
         text: 'by Nimbus Terrafaux',
         fontFamily: 'French Script MT',
         fontSize: 40,
-        x: 380,
-        y: 110,
+        x: 400,
+        y: 120,
         fill: '#3538FF'
     });
 
@@ -217,13 +217,8 @@ function initializeField() {
 
 var current = [];
 
-// click on card
-//<<<<<<< HEAD
-//layerOfGame.on('click', function (ev) {
-
-//=======
 layerOfGame.on('click', function (ev) {
-//>>>>>>> 7f3f5358d63aa67308d78713478d5efc57f93c30
+
     var fx = ev.evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
     var fy = ev.evt.clientY + document.body.scrollTop + document.documentElement.scrollTop;
 
