@@ -11,7 +11,7 @@ var layerOfMenu = new Kinetic.Layer();
 layerOfMenu.setWidth(800);
 layerOfMenu.setHeight(600);
 
-// create the canvas
+// creates the canvas
 var layerOfGame = new Kinetic.Layer();
 layerOfGame.setWidth(800);
 layerOfGame.setHeight(600);
@@ -172,6 +172,17 @@ var cards = createCards(rows, cols);
         cornerRadius: 10
     });
 
+    invisibleRectScores.on('click', function () {
+        var ranking = document.querySelector('ol');
+
+        if (ranking === null) {
+            highscore.show();
+        }
+        else {
+            ranking.parentNode.removeChild(ranking);
+        }       
+    });
+
     invisibleRectScores.on('mouseover', function () {
         highScoresRectVisible.fill('#CCFFFF');
         layerOfMenu.draw();
@@ -246,7 +257,7 @@ layerOfGame.on('click', function (ev) {
                 cards[i].isTurned = false;
             }
             current = new Array();
-        }, 100);
+        }, 500);
     }
 });
 
