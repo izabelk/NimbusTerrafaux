@@ -12,7 +12,7 @@ function renderRect(x, y, width, height, stroke, fill, cornerRadius, visible, st
         cornerRadius: cornerRadius,
         visible: visible,
         strokeWidth: strokeWidth,
-        opacity: opacity
+        opacity: 0
     });
 
     return rect;

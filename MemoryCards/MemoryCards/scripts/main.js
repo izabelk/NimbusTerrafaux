@@ -16,6 +16,7 @@ var layerOfGame = new Kinetic.Layer();
 layerOfGame.setWidth(800);
 layerOfGame.setHeight(600);
 
+
 var layerOffset = 10;
 var rows = 4;
 var cols = 4;
@@ -46,7 +47,8 @@ function initializeField() {
         width: layerOfGame.getWidth() - layerOffset * 2,
         height: layerOfGame.getHeight() - layerOffset * 2,
         visible : true,
-        fill: 'none',
+        fill: 'rgba(1,1,1,0)',
+        opacity: 0
         //stroke: 'black',
         //strokeWidth: 4
     }); // Create table
