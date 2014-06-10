@@ -39,6 +39,7 @@ var highscore = {
         var orderedList = document.createElement('ol');
 
         // set position of the <ol> ranking
+        orderedList.id = 'highscore';
         orderedList.style.position = 'absolute';
         orderedList.style.top = '350px';
         orderedList.style.left = '250px';
@@ -73,5 +74,20 @@ var highscore = {
 
         // where to show the ol
         document.getElementById('container').appendChild(orderedList);
+    },
+
+    isShowed: function () {
+        var ranking = document.querySelector('#highscore');
+
+        return ranking !== null;
+    },
+
+    removeFromDom: function () {
+
+        if (highscore.isShowed()) {
+            var orderedList = document.querySelector('#highscore');
+
+            orderedList.parentNode.removeChild(orderedList);
+        }
     }
 }
