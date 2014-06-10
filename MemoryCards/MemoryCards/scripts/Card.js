@@ -111,7 +111,7 @@ function Card(frontFace, backFace, position, id) {
     this.cardShapeKineticObj = undefined;
     this.isFinished = false;
     this.id = id;
-    
+
     this.animationStage = {
         isAnim: false,
         maxStage: imageDimension.width / 4,
@@ -181,10 +181,10 @@ Card.prototype.draw = function (layer) {
                 var rectCurrentX = this.cardShapeKineticObj.getX();
                 var propagationRate = imageDimension.width / this.animationStage.maxStage;
 
-                if (this.animationStage.currentStage < this.animationStage.maxStage-1 && !this.animationStage.unwielding ) {
+                if (this.animationStage.currentStage < this.animationStage.maxStage - 1 && !this.animationStage.unwielding) {
 
                     this.kineticImage.setWidth(currentWidth - propagationRate);
-                    this.kineticImage.setX(currentX + propagationRate/2);
+                    this.kineticImage.setX(currentX + propagationRate / 2);
                     this.cardShapeKineticObj.setWidth(rectCurrentWidth - propagationRate);
                     this.cardShapeKineticObj.setX(rectCurrentX + propagationRate / 2);
                     this.animationStage.currentStage += 1;
@@ -214,8 +214,6 @@ Card.prototype.draw = function (layer) {
             }
 
             this.kineticImage.setImage(this.isTurned ? this.frontFace : this.backFace);
-            
-
         }
 
     }

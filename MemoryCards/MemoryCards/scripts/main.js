@@ -42,9 +42,9 @@ function initializeField() {
         width: layerOfGame.getWidth() - layerOffset * 2,
         height: layerOfGame.getHeight() - layerOffset * 2,
         visible : true,
-        fill: 'lightblue',
-        stroke: 'black',
-        strokeWidth: 4
+        fill: 'none',
+        //stroke: 'black',
+        //strokeWidth: 4
     }); // Create table
 
     layerOfGame.add(rect);
