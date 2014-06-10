@@ -18,7 +18,7 @@ layerOfGame.setHeight(600);
 
 var layerOffset = 10;
 var rows = 4;
-var cols = 4;
+var cols = 5;
 var cardOffset = 10;
 // if we want cards to be floated left
 var initialXOffset = (cardOffset + layerOffset) * 2;
@@ -70,9 +70,10 @@ layerOfGame.on('click', function (ev) {
         if (!cards[i].isTurned &&
             !cards[i].isFinished &&
             cards[i].isInBounds(fx, fy)) {
-
-            cards[i].setTurned();
-            current.push(cards[i]);
+            if (current.length < 2) { // We don't want to turn more than 2 cards at the same time
+                cards[i].setTurned();
+                current.push(cards[i]);
+            }
             break;
         }
     }
@@ -87,11 +88,18 @@ layerOfGame.on('click', function (ev) {
             }
 
             for (var i = 0; i < cards.length; i++) {
-                cards[i].isTurned = false;
+
+                if (cards[i].isTurned) {
+
+                    cards[i].isTurned = false;
+                    cards[i].animationStage.isAnim = true;
+                }
+                
+
             }
 
             current = new Array();
-        }, 500);
+        }, 1000); // Additional 500ms added for animation
     }
 });
 
