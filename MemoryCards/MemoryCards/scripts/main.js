@@ -18,7 +18,7 @@ layerOfGame.setHeight(600);
 
 var layerOffset = 10;
 var rows = 4;
-var cols = 5;
+var cols = 4;
 var cardOffset = 10;
 // if we want cards to be floated left
 var initialXOffset = (cardOffset + layerOffset) * 2;
