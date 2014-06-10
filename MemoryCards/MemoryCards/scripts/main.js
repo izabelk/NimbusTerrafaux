@@ -6,12 +6,17 @@ var stage = new Kinetic.Stage({
     height: 600
 });
 
-// create the canvas
-var layer = new Kinetic.Layer();
-layer.setWidth(800);
-layer.setHeight(600);
-var layerOffset = 10;
+//creates the menu
+var layerOfMenu = new Kinetic.Layer();
+layerOfMenu.setWidth(800);
+layerOfMenu.setHeight(600);
 
+// creates the canvas
+var layerOfGame = new Kinetic.Layer();
+layerOfGame.setWidth(800);
+layerOfGame.setHeight(600);
+
+var layerOffset = 10;
 var rows = 4;
 var cols = 4;
 var cardOffset = 10;
@@ -19,99 +24,119 @@ var cardOffset = 10;
 var initialXOffset = (cardOffset + layerOffset) * 2;
 var initialYOffset = (cardOffset + layerOffset) * 2;
 // if we want cards to be centered
-// var initialXOffset = (layer.getWidth() - cols * Card.DIMENSION.width - cols * cardOffset) / 2;
-// var initialYOffset = (layer.getHeight() - rows * Card.DIMENSION.height - rows * cardOffset) / 2;
+// var initialXOffset = (layerOfGame.getWidth() - cols * Card.DIMENSION.width - cols * cardOffset) / 2;
+// var initialYOffset = (layerOfGame.getHeight() - rows * Card.DIMENSION.height - rows * cardOffset) / 2;
 
-function createCards() {
+//creating cards
+var cards = createCards(rows, cols);
+var currentScore = 0;
+var win = false;
 
-    var arr = [];
-    for (var i = 0; i < 5; i++) {
-        for (var j = 0; j < 5; j++) {
-
-            var pos = {
-                x: initialXOffset + j * Card.DIMENSION.width + cardOffset * j,
-                y: initialYOffset + i * Card.DIMENSION.height + cardOffset * i
-            }
-            arr.push(new Card(faces.frontFaces[0], faces.backFaces[0], pos));
-        }
-    }
-    return arr;
-}
-
-var cards = createCards();
+initializeMenu();
 
 // draw field
-(function initialize() {
+function initializeField() {
     var rect = new Kinetic.Rect({
         x: layerOffset,
         y: layerOffset,
-        width: layer.getWidth() - layerOffset * 2,
-        height: layer.getHeight() - layerOffset * 2,
+        width: layerOfGame.getWidth() - layerOffset * 2,
+        height: layerOfGame.getHeight() - layerOffset * 2,
+        visible : true,
         fill: 'lightblue',
         stroke: 'black',
         strokeWidth: 4
     }); // Create table
 
-    layer.add(rect);
+    layerOfGame.add(rect);
+    //layerOfGame.draw();
+
+    currentScore = 0;
+    win = false;
 
     for (var i = 0; i < cards.length; i++) {
-        cards[i].draw(layer);
+        cards[i].draw(layerOfGame);
     }
-})();
+}
 
 var current = [];
 
-// click on card
-layer.on('click', function (ev) {
+layerOfGame.on('click', function (ev) {
 
     var fx = ev.evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
     var fy = ev.evt.clientY + document.body.scrollTop + document.documentElement.scrollTop;
 
     for (var i = 0; i < cards.length; i++) {
-        if (cards[i].isInBounds(fx, fy)) {
 
-            if (current.length < 2) {
-
+        if (!cards[i].isTurned &&
+            !cards[i].isFinished &&
+            cards[i].isInBounds(fx, fy)) {
+            if (current.length < 2) { // We don't want to turn more than 2 cards at the same time
                 cards[i].setTurned();
                 current.push(cards[i]);
-                
             }
+            break;
         }
     }
 
     if (current.length == 2) {
-
         setTimeout(function () {
 
-            /*if (current[0].backFaces == current[1].backFaces) {
-
+            if (current[0].id == current[1].id) {
                 current[0].finish();
                 current[1].finish();
+                currentScore += 2;
+            }
 
-            }*/
+            for (var i = 0; i < cards.length; i++) {
 
-                for (var i = 0; i < cards.length; i++) {
+                if (cards[i].isTurned) {
 
                     cards[i].isTurned = false;
-
+                    cards[i].animationStage.isAnim = true;
                 }
+                
+
+            }
 
             current = new Array();
-
-        }, 100);
-
+        }, 1000); // Additional 500ms added for animation
     }
 });
 
 // animation frame
 var anim = new Kinetic.Animation(function (frame) {
-    for (var i = 0; i < cards.length; i++) {
 
-        cards[i].draw(layer);
+    if (win) {
+
+        anim.stop();
+        highscore.addUser(prompt('You just get ' + currentScore + ' scores. Enter your name:'), currentScore);
+        layerOfGame.visible(false);
+        layerOfMenu.visible(true);
+        layerOfMenu.draw();
+        return;
     }
 
-}, layer);
+    for (var i = 0; i < cards.length; i++) {
 
-anim.start();
+        cards[i].draw(layerOfGame);
+    }
 
-stage.add(layer);
+    win = isWin();
+
+}, layerOfGame);
+
+var isWin = function () {
+
+    for (var i = 0; i < cards.length; i++) {
+
+        if (!cards[i].isFinished) {
+
+            return false;
+        }
+    }
+
+    return true;
+}
+
+stage.add(layerOfMenu);
+stage.add(layerOfGame);
