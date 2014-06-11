@@ -12,7 +12,8 @@ function renderRect(x, y, width, height, stroke, fill, cornerRadius, visible, st
         cornerRadius: cornerRadius,
         visible: visible,
         strokeWidth: strokeWidth,
-        opacity: 0
+        opacity: opacity
+        //opacity:0; -> Tanya version
     });
 
     return rect;
@@ -34,8 +35,11 @@ function renderText(text, fontFamily, fontSize, x, y, fill) {
 
 function initializeMenu() {
 
-    var rect = renderRect(layerOffset, layerOffset, layerOfMenu.getWidth() - layerOffset * 2,
-        layerOfMenu.getHeight() - layerOffset * 2, '#51A5FF', '#B5FFDE', 10, true, 4, 1);
+    //var rect = renderRect(layerOffset, layerOffset, layerOfMenu.getWidth() - layerOffset * 2,
+    //    layerOfMenu.getHeight() - layerOffset * 2, '#51A5FF', '#B5FFDE', 10, true, 4, 1);
+
+    var rect = renderRect(layerOffset, layerOffset, 500, 
+       layerOfMenu.getHeight() - layerOffset * 2, 'white', 'white', 10, true, 4, 1);
 
     var title = renderText('Memory Cards', 'French Script MT', 80, 240, 50, '#3538FF');
     var subTitle = renderText('by Nimbus Terrafaux', 'French Script MT', 40, 400, 130, '#3538FF');
