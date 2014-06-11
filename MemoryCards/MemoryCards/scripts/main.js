@@ -16,6 +16,7 @@ var layerOfGame = new Kinetic.Layer();
 layerOfGame.setWidth(800);
 layerOfGame.setHeight(600);
 
+
 var layerOffset = 10;
 var rows = 4;
 var cols = 4;
@@ -28,7 +29,8 @@ var initialYOffset = (cardOffset + layerOffset) * 2;
 // var initialYOffset = (layerOfGame.getHeight() - rows * Card.DIMENSION.height - rows * cardOffset) / 2;
 
 //creating cards
-var cards = createCards(rows, cols);
+var inGameMode = false;
+var cards;
 var currentScore = 0;
 var win = false;
 
@@ -36,23 +38,29 @@ initializeMenu();
 
 // draw field
 function initializeField() {
+    // if it is clicked new game without closing highscore
+    highscore.removeFromDom();
+
     var rect = new Kinetic.Rect({
         x: layerOffset,
         y: layerOffset,
         width: layerOfGame.getWidth() - layerOffset * 2,
         height: layerOfGame.getHeight() - layerOffset * 2,
         visible : true,
-        fill: 'lightblue',
-        stroke: 'black',
-        strokeWidth: 4
+        fill: 'rgba(1,1,1,0)',
+        opacity: 0
+        //stroke: 'black',
+        //strokeWidth: 4
     }); // Create table
 
     layerOfGame.add(rect);
     //layerOfGame.draw();
 
+    inGameMode = true;
     currentScore = 0;
     win = false;
 
+    cards = createCards(rows, cols);
     for (var i = 0; i < cards.length; i++) {
         cards[i].draw(layerOfGame);
     }
@@ -60,46 +68,49 @@ function initializeField() {
 
 var current = [];
 
-layerOfGame.on('click', function (ev) {
+layerOfGame.on('mousedown', function (ev) {
 
-    var fx = ev.evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-    var fy = ev.evt.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+    if (inGameMode) {
 
-    for (var i = 0; i < cards.length; i++) {
+        var fx = ev.evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+        var fy = ev.evt.clientY + document.body.scrollTop + document.documentElement.scrollTop;
 
-        if (!cards[i].isTurned &&
-            !cards[i].isFinished &&
-            cards[i].isInBounds(fx, fy)) {
-            if (current.length < 2) { // We don't want to turn more than 2 cards at the same time
-                cards[i].setTurned();
-                current.push(cards[i]);
-            }
-            break;
-        }
-    }
+        for (var i = 0; i < cards.length; i++) {
 
-    if (current.length == 2) {
-        setTimeout(function () {
-
-            if (current[0].id == current[1].id) {
-                current[0].finish();
-                current[1].finish();
-                currentScore += 2;
-            }
-
-            for (var i = 0; i < cards.length; i++) {
-
-                if (cards[i].isTurned) {
-
-                    cards[i].isTurned = false;
-                    cards[i].animationStage.isAnim = true;
+            if (!cards[i].isTurned &&
+                !cards[i].isFinished &&
+                cards[i].isInBounds(fx, fy)) {
+                if (current.length < 2) { // We don't want to turn more than 2 cards at the same time
+                    cards[i].setTurned();
+                    current.push(cards[i]);
                 }
-                
-
+                break;
             }
+        }
 
-            current = new Array();
-        }, 1000); // Additional 500ms added for animation
+        if (current.length == 2) {
+            setTimeout(function () {
+
+                if (current[0].id == current[1].id) {
+                    current[0].finish();
+                    current[1].finish();
+                    currentScore += 2;
+                }
+
+                for (var i = 0; i < cards.length; i++) {
+
+                    if (cards[i].isTurned) {
+
+                        cards[i].isTurned = false;
+                        cards[i].animationStage.isAnim = true;
+                    }
+
+
+                }
+
+                current = new Array();
+            }, 750); // Additional 250ms added for animation
+        }
     }
 });
 
@@ -107,7 +118,7 @@ layerOfGame.on('click', function (ev) {
 var anim = new Kinetic.Animation(function (frame) {
 
     if (win) {
-
+        inGameMode = false;
         anim.stop();
         highscore.addUser(prompt('You just get ' + currentScore + ' scores. Enter your name:'), currentScore);
         layerOfGame.visible(false);

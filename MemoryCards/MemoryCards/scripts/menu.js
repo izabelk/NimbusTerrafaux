@@ -12,7 +12,7 @@ function renderRect(x, y, width, height, stroke, fill, cornerRadius, visible, st
         cornerRadius: cornerRadius,
         visible: visible,
         strokeWidth: strokeWidth,
-        opacity: opacity
+        opacity: 0
     });
 
     return rect;
@@ -66,13 +66,12 @@ function initializeMenu() {
     var invisibleRectScores = renderRect(250, 290, 200, 50, 'none', 'none', 10, true, 1, 0);
 
     invisibleRectScores.on('click', function () {
-        var ranking = document.querySelector('ol');
 
-        if (ranking === null) {
+        if (!highscore.isShowed()) {
             highscore.show();
         }
         else {
-            ranking.parentNode.removeChild(ranking);
+            highscore.removeFromDom();
         }
     });
 

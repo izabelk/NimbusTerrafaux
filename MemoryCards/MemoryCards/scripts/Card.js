@@ -100,7 +100,7 @@ function loadCardFaces(frontFace, backFace) {
     }
 
 }
-var imageDimension = { width: 80, height: 80 };
+
 function Card(frontFace, backFace, position, id) {
 
     this.frontFace = frontFace;
@@ -111,10 +111,10 @@ function Card(frontFace, backFace, position, id) {
     this.cardShapeKineticObj = undefined;
     this.isFinished = false;
     this.id = id;
-    
+
     this.animationStage = {
         isAnim: false,
-        maxStage: imageDimension.width / 4,
+        maxStage: imageDimension.width / 15,
         currentStage: 0,
         unwielding: false
     }
@@ -181,10 +181,10 @@ Card.prototype.draw = function (layer) {
                 var rectCurrentX = this.cardShapeKineticObj.getX();
                 var propagationRate = imageDimension.width / this.animationStage.maxStage;
 
-                if (this.animationStage.currentStage < this.animationStage.maxStage-1 && !this.animationStage.unwielding ) {
+                if (this.animationStage.currentStage < this.animationStage.maxStage - 1 && !this.animationStage.unwielding) {
 
                     this.kineticImage.setWidth(currentWidth - propagationRate);
-                    this.kineticImage.setX(currentX + propagationRate/2);
+                    this.kineticImage.setX(currentX + propagationRate / 2);
                     this.cardShapeKineticObj.setWidth(rectCurrentWidth - propagationRate);
                     this.cardShapeKineticObj.setX(rectCurrentX + propagationRate / 2);
                     this.animationStage.currentStage += 1;
@@ -214,8 +214,6 @@ Card.prototype.draw = function (layer) {
             }
 
             this.kineticImage.setImage(this.isTurned ? this.frontFace : this.backFace);
-            
-
         }
 
     }
@@ -224,7 +222,7 @@ Card.prototype.draw = function (layer) {
 Card.prototype.isInBounds = function (x, y) {
 
     function inRange(range, comp) {
-        return range.low < comp && comp < range.high;
+        return range.low <= comp && range.high >= comp;
     }
 
     return inRange({
