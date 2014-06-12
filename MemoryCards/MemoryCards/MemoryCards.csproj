@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="imgs\background\map.gif" />
     <Content Include="imgs\cardFronts\Aland.ico" />
     <Content Include="imgs\cardFronts\Andorra.ico" />
     <Content Include="imgs\cardFronts\Bahrain.ico" />
