@@ -39,7 +39,7 @@ function initializeMenu() {
     //    layerOfMenu.getHeight() - layerOffset * 2, '#51A5FF', '#B5FFDE', 10, true, 4, 1);
 
     var rect = renderRect(layerOffset, layerOffset, 500, 
-       layerOfMenu.getHeight() - layerOffset * 2, 'none', 'none', 10, true, 4, 1);
+       layerOfMenu.getHeight() - layerOffset * 2, 'transparent', 'transparent', 10, true, 4, 1);
 
     var title = renderText('Memory Cards', 'French Script MT', 80, 210, 50, '#3538FF');
     var subTitle = renderText('by Nimbus Terrafaux', 'French Script MT', 40, 370, 130, '#3538FF');

@@ -263,7 +263,6 @@ function createCards(rows, cols) {
     return cards;
 }
 
-
 function shuffleFrontImages(array) {
     var length = array.length;
     for (var i = 0; i < length; i++) {

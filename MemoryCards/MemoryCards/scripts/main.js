@@ -47,11 +47,8 @@ function initializeField() {
         width: layerOfGame.getWidth() - layerOffset * 2,
         height: layerOfGame.getHeight() - layerOffset * 2,
         visible : true,
-        fill: 'rgba(1,1,1,0)',
-        opacity: 0
-        //stroke: 'black',
-        //strokeWidth: 4
-    }); // Create table
+        fill: 'transparent'
+    });
 
     layerOfGame.add(rect);
     //layerOfGame.draw();
@@ -69,7 +66,6 @@ function initializeField() {
 var current = [];
 
 layerOfGame.on('mousedown', function (ev) {
-
     if (inGameMode) {
 
         var fx = ev.evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
@@ -91,7 +87,8 @@ layerOfGame.on('mousedown', function (ev) {
         if (current.length == 2) {
             setTimeout(function () {
 
-                if (current[0].id == current[1].id) {
+                if (current[0] && current[1] &&
+                    current[0].id == current[1].id) {
                     current[0].finish();
                     current[1].finish();
                     currentScore += 2;
@@ -118,10 +115,10 @@ layerOfGame.on('mousedown', function (ev) {
 var anim = new Kinetic.Animation(function (frame) {
 
     if (win) {
-        inGameMode = false;
         anim.stop();
+        inGameMode = false;
         highscore.addUser(prompt('You just get ' + currentScore + ' scores. Enter your name:'), currentScore);
-        layerOfGame.visible(false);
+        layerOfGame.destroyChildren();
         layerOfMenu.visible(true);
         layerOfMenu.draw();
         return;
