@@ -3,8 +3,8 @@
 var timer = {
     colors: ['#2e8e00', '#ffcf1c', '#c50000'],
     radius: 20,
-    positionX: 30,
-    positionY: 30,
+    positionX: 245,
+    positionY: 500,
     elapsedTime: 1,
     draw: function draw(paper, tile) {
         var tileToDraw = paper.path(tile.path);
