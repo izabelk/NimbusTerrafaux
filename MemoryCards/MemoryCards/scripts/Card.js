@@ -111,6 +111,14 @@ function Card(frontFace, backFace, position, id) {
     this.cardShapeKineticObj = undefined;
     this.isFinished = false;
     this.id = id;
+
+    this.animationStage = {
+        isAnim: false,
+        maxStage: imageDimension.width / 15,
+        currentStage: 0,
+        unwielding: false
+    }
+
 }
 
 Card.DIMENSION = { width: 100, height: 100 };
@@ -121,7 +129,7 @@ Card.prototype.setTurned = function () {
     if (!this.isFinished) {
 
         this.isTurned = true;
-
+        this.animationStage.isAnim = true;
     }
 
 }
@@ -148,10 +156,10 @@ Card.prototype.draw = function (layer) {
             y: this.position.y,
             width: Card.DIMENSION.width,
             height: Card.DIMENSION.height,
-            fill: 'rgba(79, 184, 253, 0.4)',
-            stroke: 'rgb(16, 80, 121)',
+            fill: 'rgba(79, 184, 253, .4)',
+            stroke: 'rgba(189, 229, 255, .7)',
             strokeWidth: 2,
-            cornerRadius: 5
+            cornerRadius: 0
         });
 
         layer.add(this.cardShapeKineticObj);
@@ -165,8 +173,47 @@ Card.prototype.draw = function (layer) {
 
         } else {
 
-            this.kineticImage.setImage(this.isTurned ? this.frontFace : this.backFace);
+            if (this.animationStage.isAnim) {
 
+                var currentWidth = this.kineticImage.getWidth();
+                var currentX = this.kineticImage.getX();
+                var rectCurrentWidth = this.cardShapeKineticObj.getWidth();
+                var rectCurrentX = this.cardShapeKineticObj.getX();
+                var propagationRate = imageDimension.width / this.animationStage.maxStage;
+
+                if (this.animationStage.currentStage < this.animationStage.maxStage - 1 && !this.animationStage.unwielding) {
+
+                    this.kineticImage.setWidth(currentWidth - propagationRate);
+                    this.kineticImage.setX(currentX + propagationRate / 2);
+                    this.cardShapeKineticObj.setWidth(rectCurrentWidth - propagationRate);
+                    this.cardShapeKineticObj.setX(rectCurrentX + propagationRate / 2);
+                    this.animationStage.currentStage += 1;
+
+                } else {
+
+                    this.animationStage.unwielding = true;
+
+                }
+
+                if (this.animationStage.unwielding) {
+
+                    if (this.animationStage.currentStage <= 0) {
+
+                        this.animationStage.unwielding = false;
+                        this.animationStage.isAnim = false;
+                    }
+
+                    this.kineticImage.setWidth(currentWidth + propagationRate);
+                    this.kineticImage.setX(currentX - propagationRate / 2);
+                    this.cardShapeKineticObj.setWidth(rectCurrentWidth + propagationRate);
+                    this.cardShapeKineticObj.setX(rectCurrentX - propagationRate / 2);
+                    this.animationStage.currentStage -= 1;
+
+                }
+
+            }
+
+            this.kineticImage.setImage(this.isTurned ? this.frontFace : this.backFace);
         }
 
     }
@@ -175,7 +222,7 @@ Card.prototype.draw = function (layer) {
 Card.prototype.isInBounds = function (x, y) {
 
     function inRange(range, comp) {
-        return range.low < comp && comp < range.high;
+        return range.low <= comp && range.high >= comp;
     }
 
     return inRange({
@@ -195,22 +242,26 @@ function createCards(rows, cols) {
     var cards = [],
         numberOfCouples = (rows * cols) / 2,
         cardFronts = getCurrentGameCardFronts(numberOfCouples);
+
     for (var i = 0; i < rows; i++) {
         for (var j = 0; j < cols; j++) {
+
             var pos = {
                 x: initialXOffset + j * Card.DIMENSION.width + cardOffset * j,
                 y: initialYOffset + i * Card.DIMENSION.height + cardOffset * i
             }
+
             var cardNumber = i * cols + j,
                 id = cardNumber % numberOfCouples;
-            var faces = loadCardFaces(cardFronts[id], 'imgs/Nimbus_terrafaux_mk.jpg');
+            var faces = loadCardFaces(cardFronts[id], 'imgs/cardBack/question.png');
+
             cards.push(new Card(faces.frontFace, faces.backFace, pos, id));
+
         }
     }
     shuffleFrontImages(cards);
     return cards;
 }
-
 
 function shuffleFrontImages(array) {
     var length = array.length;

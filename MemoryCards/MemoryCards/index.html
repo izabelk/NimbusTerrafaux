@@ -2,13 +2,60 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Memory Cards</title>
-    <script src="scripts/kinetic-v5.1.0.min.js"></script>
     <script src="scripts/raphael-min.js"></script>
+    <script src="scripts/kinetic-v5.1.0.min.js"></script>
     <link href="styles/style.css" rel="stylesheet" />
 </head>
 <body>
+    <svg width="352" height="423" id="head">
+        <g transform="translate(0,423) scale(0.1,-0.1)"
+           fill="black" stroke="black">
+            <path d="M1730 3821 c-164 -15 -504 -103 -620 -161 -149 -73 -255 -150 -381
+                    -276 -93 -92 -112 -117 -153 -200 -60 -121 -113 -284 -126 -388 -14 -113 -12
+                    -304 5 -488 13 -140 19 -169 55 -265 45 -119 169 -327 255 -428 87 -102 158
+                    -239 183 -354 30 -135 19 -467 -18 -596 -61 -205 -128 -360 -177 -403 -24 -22
+                    -33 -23 -142 -21 -68 2 -115 -1 -114 -7 4 -12 224 -17 254 -6 58 23 181 312
+                    215 506 18 107 32 353 23 414 -30 209 -85 335 -208 484 -52 63 -102 137 -174
+                    254 -40 67 -107 231 -113 279 -35 273 -38 366 -19 645 9 128 130 417 208 498
+                    143 149 234 222 351 285 32 18 70 38 85 46 57 32 220 83 374 118 226 51 383
+                    56 580 19 214 -41 356 -100 552 -228 202 -132 302 -250 402 -473 56 -124 63
+                    -195 29 -296 -30 -90 -25 -129 32 -226 20 -35 44 -77 54 -94 17 -32 76 -109
+                    142 -188 44 -52 79 -122 70 -143 -3 -7 -20 -24 -37 -38 -29 -23 -38 -25 -128
+                    -23 -91 2 -98 1 -112 -20 -28 -43 -30 -84 -8 -128 12 -22 21 -46 21 -55 0 -25
+                    -29 -61 -60 -74 -17 -7 -30 -15 -30 -19 0 -3 14 -18 32 -32 l32 -27 -29 -41
+                    c-15 -23 -34 -45 -40 -49 -11 -7 -35 -45 -35 -56 0 -3 18 -25 39 -50 92 -106
+                    50 -260 -89 -330 -55 -28 -95 -35 -272 -46 -162 -10 -206 -21 -247 -59 l-31
+                    -29 0 -224 c0 -169 -4 -235 -15 -272 -41 -136 9 -283 108 -320 52 -20 100 -24
+                    107 -11 3 6 -8 11 -25 13 -54 5 -111 32 -134 63 -50 68 -63 156 -36 245 12 38
+                    15 101 16 272 l0 224 26 24 c36 33 78 43 239 53 77 6 159 13 184 17 104 16
+                    196 91 229 185 17 51 18 62 6 114 -9 39 -24 68 -44 89 -17 18 -31 38 -31 45 0
+                    7 20 37 45 65 49 58 56 87 26 113 -19 16 -18 17 15 48 40 38 44 72 14 130 -12
+                    24 -17 48 -14 64 12 49 27 56 127 56 90 0 93 1 135 34 28 23 42 42 42 58 0 32
+                    -32 92 -77 146 -67 79 -128 158 -143 187 -8 16 -33 59 -54 96 -50 86 -56 135
+                    -26 215 19 53 21 73 15 136 -7 81 -16 105 -77 227 -91 185 -199 303 -383 424
+                    -194 127 -336 185 -550 227 -151 30 -237 36 -355 26" />
+        </g>
+    </svg>
 
-    <div id="container"></div>
+    <svg width="1500" height="800">
+        <svg width="800" height="600" id="map">
+            <image xlink:href="imgs/background/map.gif" x="0" y="60" height="550px" width="700px" />
+        </svg>
+        <rect x="720" y="10" width="200" height="200" fill="#fcb5b5" stroke="none" stroke-width="2" transform="rotate(15 100 100)"></rect>
+        <text x="550" y="450" font-family="French Script MT" font-size="132" fill="blue" transform="rotate(-25,100,100)">?</text>
+        <text x="850" y="-60" font-family="French Script MT" font-size="100" fill="green" transform="rotate(20,100,100)">?</text>
+        <text x="710" y="260" font-family="French Script MT" font-size="110" fill="red" transform="rotate(-10,100,100)">?</text>
+        <text x="780" y="-20" font-family="French Script MT" font-size="110" fill="yellow" transform="rotate(15,100,100)">?</text>
+        <text x="600" y="-150" font-family="French Script MT" font-size="110" fill="orange" transform="rotate(50,100,100)">?</text>
+        <text x="740" y="100" font-family="French Script MT" font-size="80" fill="blue" transform="rotate(15,100,100)">Train</text>
+        <text x="740" y="140" font-family="French Script MT" font-size="80" fill="blue" transform="rotate(15,100,100)">your</text>
+        <text x="740" y="200" font-family="French Script MT" font-size="80" fill="blue" transform="rotate(15,100,100)">brain!</text>
+        <rect x="720" y="10" width="200" height="20" fill="#fce0e0" stroke="none" stroke-width="2" transform="rotate(15 100 100)"></rect>
+    </svg>
+
+    <div id="container">
+
+    </div>
     <script src="scripts/Card.js"></script>
     <script src="scripts/menu.js"></script>
     <script src="scripts/Highscore.js"></script>
