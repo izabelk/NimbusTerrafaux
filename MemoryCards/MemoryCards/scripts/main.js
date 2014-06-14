@@ -61,6 +61,9 @@ function initializeField() {
     for (var i = 0; i < cards.length; i++) {
         cards[i].draw(layerOfGame);
     }
+    timer.positionX = 245;
+    timer.positionY = 500;
+    timer.start();
 }
 
 var current = [];
@@ -83,6 +86,7 @@ layerOfGame.on('mousedown', function (ev) {
                 break;
             }
         }
+     
 
         if (current.length == 2) {
             setTimeout(function () {
