@@ -40,6 +40,7 @@ var timer = {
                                        timer.positionY - timer.radius,
                                        timer.radius * 3, timer.radius * 3);
 
+        timer.elapsedTime = 1;
         var interval = setInterval(function () {
             timerPaper.clear();
             var fillColor = timer.elapsedTime < 30 ? timer.colors[0] : timer.elapsedTime < 45 ? timer.colors[1] : timer.colors[2];
@@ -61,4 +62,4 @@ var timer = {
     stop: function stop() {
         timer.elapsedTime = 60;
     }
-}
+};

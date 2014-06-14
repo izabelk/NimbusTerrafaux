@@ -46,7 +46,7 @@ function initializeField() {
         y: layerOffset,
         width: layerOfGame.getWidth() - layerOffset * 2,
         height: layerOfGame.getHeight() - layerOffset * 2,
-        visible : true,
+        visible: true,
         fill: 'transparent'
     });
 
@@ -61,8 +61,7 @@ function initializeField() {
     for (var i = 0; i < cards.length; i++) {
         cards[i].draw(layerOfGame);
     }
-    timer.positionX = 245;
-    timer.positionY = 500;
+
     timer.start();
 }
 
@@ -86,7 +85,7 @@ layerOfGame.on('mousedown', function (ev) {
                 break;
             }
         }
-     
+
 
         if (current.length == 2) {
             setTimeout(function () {
@@ -96,6 +95,10 @@ layerOfGame.on('mousedown', function (ev) {
                     current[0].finish();
                     current[1].finish();
                     currentScore += 2;
+
+                    if (timer.elapsedTime >= 2) {
+                        timer.elapsedTime -= 2;
+                    }
                 }
 
                 for (var i = 0; i < cards.length; i++) {
@@ -121,7 +124,9 @@ var anim = new Kinetic.Animation(function (frame) {
     if (win) {
         anim.stop();
         inGameMode = false;
-        highscore.addUser(prompt('You just get ' + currentScore + ' scores. Enter your name:'), currentScore);
+        var bonusTimeScore = (60 - timer.elapsedTime) * 5;
+        timer.stop();
+        highscore.addUser(prompt('You just get ' + (currentScore + bonusTimeScore) + ' scores. Enter your name:'), currentScore + bonusTimeScore);
         layerOfGame.destroyChildren();
         layerOfMenu.visible(true);
         layerOfMenu.draw();
