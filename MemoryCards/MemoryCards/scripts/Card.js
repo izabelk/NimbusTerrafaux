@@ -197,7 +197,7 @@ Card.prototype.draw = function (layer) {
 
                 if (this.animationStage.unwielding) {
 
-                    if (this.animationStage.currentStage <= 0) {
+                    if (this.animationStage.currentStage == 1) {
 
                         this.animationStage.unwielding = false;
                         this.animationStage.isAnim = false;

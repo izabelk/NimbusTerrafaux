@@ -132,6 +132,7 @@
     </Content>
     <Content Include="JSLintNet.json" />
     <None Include="scripts\_references.js" />
+    <Content Include="scripts\timer.js" />
     <Content Include="styles\style.css" />
     <Content Include="Web.config" />
   </ItemGroup>

@@ -16,22 +16,23 @@ var layerOfGame = new Kinetic.Layer();
 layerOfGame.setWidth(800);
 layerOfGame.setHeight(600);
 
-var layerOffset = 10,
-    rows = 4,
-    cols = 4,
-    cardOffset = 10,
+
+var layerOffset = 10;
+var rows = 4;
+var cols = 4;
+var cardOffset = 10;
 // if we want cards to be floated left
-    initialXOffset = (cardOffset + layerOffset) * 2,
-    initialYOffset = (cardOffset + layerOffset) * 2;
+var initialXOffset = (cardOffset + layerOffset) * 2;
+var initialYOffset = (cardOffset + layerOffset) * 2;
 // if we want cards to be centered
 // var initialXOffset = (layerOfGame.getWidth() - cols * Card.DIMENSION.width - cols * cardOffset) / 2;
 // var initialYOffset = (layerOfGame.getHeight() - rows * Card.DIMENSION.height - rows * cardOffset) / 2;
 
 //creating cards
-var inGameMode = false,
-    cards,
-    currentScore = 0,
-    win = false;
+var inGameMode = false;
+var cards;
+var currentScore = 0;
+var win = false;
 
 initializeMenu();
 
@@ -46,11 +47,8 @@ function initializeField() {
         width: layerOfGame.getWidth() - layerOffset * 2,
         height: layerOfGame.getHeight() - layerOffset * 2,
         visible: true,
-        fill: 'rgba(1,1,1,0)',
-        opacity: 0
-        //stroke: 'black',
-        //strokeWidth: 4
-    }); // Create table
+        fill: 'transparent'
+    });
 
     layerOfGame.add(rect);
     //layerOfGame.draw();
@@ -63,12 +61,13 @@ function initializeField() {
     for (var i = 0; i < cards.length; i++) {
         cards[i].draw(layerOfGame);
     }
+
+    timer.start();
 }
 
 var current = [];
 
 layerOfGame.on('mousedown', function (ev) {
-
     if (inGameMode) {
 
         var fx = ev.evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
@@ -87,13 +86,19 @@ layerOfGame.on('mousedown', function (ev) {
             }
         }
 
+
         if (current.length == 2) {
             setTimeout(function () {
 
-                if (current[0].id == current[1].id) {
+                if (current[0] && current[1] &&
+                    current[0].id == current[1].id) {
                     current[0].finish();
                     current[1].finish();
                     currentScore += 2;
+
+                    if (timer.elapsedTime >= 2) {
+                        timer.elapsedTime -= 2;
+                    }
                 }
 
                 for (var i = 0; i < cards.length; i++) {
@@ -103,6 +108,8 @@ layerOfGame.on('mousedown', function (ev) {
                         cards[i].isTurned = false;
                         cards[i].animationStage.isAnim = true;
                     }
+
+
                 }
 
                 current = new Array();
@@ -115,10 +122,12 @@ layerOfGame.on('mousedown', function (ev) {
 var anim = new Kinetic.Animation(function (frame) {
 
     if (win) {
-        inGameMode = false;
         anim.stop();
-        highscore.addUser(prompt('You just get ' + currentScore + ' scores. Enter your name:'), currentScore);
-        layerOfGame.visible(false);
+        inGameMode = false;
+        var bonusTimeScore = (60 - timer.elapsedTime) * 5;
+        timer.stop();
+        highscore.addUser(prompt('You just get ' + (currentScore + bonusTimeScore) + ' scores. Enter your name:'), currentScore + bonusTimeScore);
+        layerOfGame.destroyChildren();
         layerOfMenu.visible(true);
         layerOfMenu.draw();
         return;
