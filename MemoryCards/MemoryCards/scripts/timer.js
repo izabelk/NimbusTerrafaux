@@ -54,10 +54,9 @@ var timer = {
                 timerPaper.clear();
                 clearInterval(interval);
             }
+
             timer.elapsedTime++;
-
         }, 1000);
-
     },
     stop: function stop() {
         timer.elapsedTime = 60;

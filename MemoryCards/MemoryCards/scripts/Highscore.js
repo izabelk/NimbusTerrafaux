@@ -22,8 +22,8 @@ var highscore = {
                 worstScore = Number(localStorage.getItem(worstPlayer));
 
             for (var i = 1; i < localStorage.length; i++) {
-                var key = localStorage.key(i);
-                var value = Number(localStorage.getItem(key));
+                var key = localStorage.key(i),
+                    value = Number(localStorage.getItem(key));
 
                 if (value < worstScore) {
                     worstScore = value;

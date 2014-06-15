@@ -24,22 +24,22 @@ var endGameText = renderText('Timeout! Game over!', 'French Script MT', 80, 210,
 layerEndGame.add(endGameText);
 layerEndGame.visible(false);
 
-var layerOffset = 10;
-var rows = 4;
-var cols = 4;
-var cardOffset = 10;
+var layerOffset = 10,
+    rows = 4,
+    cols = 4,
+    cardOffset = 10,
 // if we want cards to be floated left
-var initialXOffset = (cardOffset + layerOffset) * 2;
-var initialYOffset = (cardOffset + layerOffset) * 2;
+    initialXOffset = (cardOffset + layerOffset) * 2,
+    initialYOffset = (cardOffset + layerOffset) * 2;
 // if we want cards to be centered
 // var initialXOffset = (layerOfGame.getWidth() - cols * Card.DIMENSION.width - cols * cardOffset) / 2;
 // var initialYOffset = (layerOfGame.getHeight() - rows * Card.DIMENSION.height - rows * cardOffset) / 2;
 
 //creating cards
-var inGameMode = false;
-var cards;
-var currentScore = 0;
-var win = false;
+var inGameMode = false,
+    cards,
+    currentScore = 0,
+    win = false;
 
 initializeMenu();
 
@@ -93,7 +93,6 @@ layerOfGame.on('mousedown', function (ev) {
             }
         }
 
-
         if (current.length == 2) {
             setTimeout(function () {
 
@@ -115,10 +114,7 @@ layerOfGame.on('mousedown', function (ev) {
                         cards[i].isTurned = false;
                         cards[i].animationStage.isAnim = true;
                     }
-
-
                 }
-
                 current = new Array();
             }, 750); // Additional 250ms added for animation
         }
@@ -146,7 +142,7 @@ var anim = new Kinetic.Animation(function (frame) {
     }
 
     win = isWin();
-    if (timer.elapsedTime > 5) {
+    if (timer.elapsedTime > 60) {
         anim.stop();
         inGameMode = false;
         layerOfGame.destroyChildren();

@@ -61,7 +61,7 @@ var cardFronts = [
         'imgs/cardFronts/Uganda.ico',
         'imgs/cardFronts/Uruguay.ico',
         'imgs/cardFronts/Uzbekistan.ico'
-    ];
+];
 
 function getCurrentGameCardFronts(n) {
     var currentCardFronts = [],
@@ -127,17 +127,13 @@ var imageDimension = { width: 80, height: 80 };
 Card.prototype.setTurned = function () {
 
     if (!this.isFinished) {
-
         this.isTurned = true;
         this.animationStage.isAnim = true;
     }
-
 };
 
 Card.prototype.finish = function () {
-
     this.isFinished = true;
-
 };
 
 Card.prototype.draw = function (layer) {
@@ -208,14 +204,10 @@ Card.prototype.draw = function (layer) {
                     this.cardShapeKineticObj.setWidth(rectCurrentWidth + propagationRate);
                     this.cardShapeKineticObj.setX(rectCurrentX - propagationRate / 2);
                     this.animationStage.currentStage -= 1;
-
                 }
-
             }
-
             this.kineticImage.setImage(this.isTurned ? this.frontFace : this.backFace);
         }
-
     }
 };
 
@@ -234,7 +226,6 @@ Card.prototype.isInBounds = function (x, y) {
             low: this.position.y,
             high: this.position.y + Card.DIMENSION.height
         }, y);
-
 };
 
 function createCards(rows, cols) {
@@ -252,11 +243,10 @@ function createCards(rows, cols) {
             };
 
             var cardNumber = i * cols + j,
-                id = cardNumber % numberOfCouples;
-            var faces = loadCardFaces(cardFronts[id], 'imgs/cardBack/question.png');
+                id = cardNumber % numberOfCouples,
+                faces = loadCardFaces(cardFronts[id], 'imgs/cardBack/question.png');
 
             cards.push(new Card(faces.frontFace, faces.backFace, pos, id));
-
         }
     }
     shuffleFrontImages(cards);

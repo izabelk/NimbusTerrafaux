@@ -37,15 +37,15 @@ function initializeMenu() {
     //var rect = renderRect(layerOffset, layerOffset, layerOfMenu.getWidth() - layerOffset * 2,
     //    layerOfMenu.getHeight() - layerOffset * 2, '#51A5FF', '#B5FFDE', 10, true, 4, 1);
 
-    var rect = renderRect(layerOffset, layerOffset, 500, 
-       layerOfMenu.getHeight() - layerOffset * 2, 'transparent', 'transparent', 10, true, 4, 1);
+    var rect = renderRect(layerOffset, layerOffset, 500,
+        layerOfMenu.getHeight() - layerOffset * 2, 'transparent', 'transparent', 10, true, 4, 1),
 
-    var title = renderText('Memory Cards', 'French Script MT', 80, 210, 50, '#3538FF');
-    var subTitle = renderText('by Nimbus Terrafaux', 'French Script MT', 40, 370, 130, '#3538FF');
+        title = renderText('Memory Cards', 'French Script MT', 80, 210, 50, '#3538FF'),
+        subTitle = renderText('by Nimbus Terrafaux', 'French Script MT', 40, 370, 130, '#3538FF'),
 
-    var newGameRectVisible = renderRect(250, 230, 200, 50, '#3538FF', '#B5FFDE', 10, true, 1, 1);
-    var invisibleRectNewGame = renderRect(250, 230, 200, 50, 'none', 'none', 10, true, 1, 0);
-    var newGameText = renderText('New Game', 'Arial', 20, 300, 245, '#3538FF');
+        newGameRectVisible = renderRect(250, 230, 200, 50, '#3538FF', '#B5FFDE', 10, true, 1, 1),
+        invisibleRectNewGame = renderRect(250, 230, 200, 50, 'none', 'none', 10, true, 1, 0),
+        newGameText = renderText('New Game', 'Arial', 20, 300, 245, '#3538FF');
 
     invisibleRectNewGame.on('mouseover', function () {
         newGameRectVisible.fill('#CCFFFF');
@@ -64,9 +64,9 @@ function initializeMenu() {
         anim.start();
     });
 
-    var highScoresRectVisible = renderRect(250, 290, 200, 50, '#3538FF', '#B5FFDE', 10, true, 1, 1);
-    var highScoresText = renderText('High Scores', 'Arial', 20, 300, 305, '#3538FF');
-    var invisibleRectScores = renderRect(250, 290, 200, 50, 'none', 'none', 10, true, 1, 0);
+    var highScoresRectVisible = renderRect(250, 290, 200, 50, '#3538FF', '#B5FFDE', 10, true, 1, 1),
+        highScoresText = renderText('High Scores', 'Arial', 20, 300, 305, '#3538FF'),
+        invisibleRectScores = renderRect(250, 290, 200, 50, 'none', 'none', 10, true, 1, 0);
 
     invisibleRectScores.on('click', function () {
 
