@@ -18,8 +18,8 @@ var highscore = {
 
         // if players are more than topPlayers, removes the worst one
         if (localStorage.length > topPlayers) {
-            var worstPlayer = localStorage.key(0);
-            var worstScore = Number(localStorage.getItem(worstPlayer));
+            var worstPlayer = localStorage.key(0),
+                worstScore = Number(localStorage.getItem(worstPlayer));
 
             for (var i = 1; i < localStorage.length; i++) {
                 var key = localStorage.key(i);
@@ -51,9 +51,9 @@ var highscore = {
         // push all users in array
         for (var item in localStorage) {
             users.push(new Object({
-                name: item,
-                score: localStorage.getItem(item)
-            }))
+                                      name: item,
+                                      score: localStorage.getItem(item)
+                                  }));
         }
 
         // sort users by score

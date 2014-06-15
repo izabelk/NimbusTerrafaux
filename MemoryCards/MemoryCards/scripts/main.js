@@ -16,23 +16,22 @@ var layerOfGame = new Kinetic.Layer();
 layerOfGame.setWidth(800);
 layerOfGame.setHeight(600);
 
-
-var layerOffset = 10;
-var rows = 4;
-var cols = 4;
-var cardOffset = 10;
+var layerOffset = 10,
+    rows = 4,
+    cols = 4,
+    cardOffset = 10,
 // if we want cards to be floated left
-var initialXOffset = (cardOffset + layerOffset) * 2;
-var initialYOffset = (cardOffset + layerOffset) * 2;
+    initialXOffset = (cardOffset + layerOffset) * 2,
+    initialYOffset = (cardOffset + layerOffset) * 2;
 // if we want cards to be centered
 // var initialXOffset = (layerOfGame.getWidth() - cols * Card.DIMENSION.width - cols * cardOffset) / 2;
 // var initialYOffset = (layerOfGame.getHeight() - rows * Card.DIMENSION.height - rows * cardOffset) / 2;
 
 //creating cards
-var inGameMode = false;
-var cards;
-var currentScore = 0;
-var win = false;
+var inGameMode = false,
+    cards,
+    currentScore = 0,
+    win = false;
 
 initializeMenu();
 
@@ -46,7 +45,7 @@ function initializeField() {
         y: layerOffset,
         width: layerOfGame.getWidth() - layerOffset * 2,
         height: layerOfGame.getHeight() - layerOffset * 2,
-        visible : true,
+        visible: true,
         fill: 'rgba(1,1,1,0)',
         opacity: 0
         //stroke: 'black',
@@ -104,8 +103,6 @@ layerOfGame.on('mousedown', function (ev) {
                         cards[i].isTurned = false;
                         cards[i].animationStage.isAnim = true;
                     }
-
-
                 }
 
                 current = new Array();

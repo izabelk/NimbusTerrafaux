@@ -1,0 +1,6 @@
+﻿{
+  "ignore": [
+    "\\scripts\\kinetic-v5.1.0.min.js",
+    "\\scripts\\raphael-min.js"
+  ]
+}
