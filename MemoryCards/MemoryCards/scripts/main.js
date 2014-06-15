@@ -26,7 +26,7 @@ layerEndGame.visible(false);
 
 var layerOffset = 10,
     rows = 4,
-    cols = 4,
+    cols = 5,
     cardOffset = 10,
 // if we want cards to be floated left
     initialXOffset = (cardOffset + layerOffset) * 2,
@@ -151,7 +151,7 @@ var anim = new Kinetic.Animation(function (frame) {
         layerEndGame.draw();
         layerOfGame.visible(false);
         setTimeout(function () {
-                  layerOfMenu.visible(true);
+            layerOfMenu.visible(true);
             layerOfMenu.draw();
             layerEndGame.visible(false);
         }, 5000);

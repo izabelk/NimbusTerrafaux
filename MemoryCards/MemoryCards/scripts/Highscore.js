@@ -50,10 +50,12 @@ var highscore = {
 
         // push all users in array
         for (var item in localStorage) {
-            users.push(new Object({
-                                      name: item,
-                                      score: localStorage.getItem(item)
-                                  }));
+            users.push(
+                {
+                    name: item,
+                    score: localStorage.getItem(item)
+                }
+            );
         }
 
         // sort users by score
