@@ -13,7 +13,6 @@ function renderRect(x, y, width, height, stroke, fill, cornerRadius, visible, st
         visible: visible,
         strokeWidth: strokeWidth,
         opacity: opacity
-        //opacity:0; -> Tanya version
     });
 
     return rect;

@@ -16,6 +16,13 @@ var layerOfGame = new Kinetic.Layer();
 layerOfGame.setWidth(800);
 layerOfGame.setHeight(600);
 
+// When the time is out - game over
+var layerEndGame = new Kinetic.Layer();
+layerEndGame.setWidth(800);
+layerEndGame.setHeight(600);
+var endGameText = renderText('Timeout! Game over!', 'French Script MT', 80, 210, 50, 'red');
+layerEndGame.add(endGameText);
+layerEndGame.visible(false);
 
 var layerOffset = 10;
 var rows = 4;
@@ -139,6 +146,22 @@ var anim = new Kinetic.Animation(function (frame) {
     }
 
     win = isWin();
+    if (timer.elapsedTime > 5) {
+        anim.stop();
+        inGameMode = false;
+        layerOfGame.destroyChildren();
+
+        layerEndGame.visible(true);
+        layerEndGame.draw();
+        layerOfGame.visible(false);
+        setTimeout(function () {
+                  layerOfMenu.visible(true);
+            layerOfMenu.draw();
+            layerEndGame.visible(false);
+        }, 5000);
+
+        return;
+    }
 
 }, layerOfGame);
 
@@ -157,3 +180,4 @@ var isWin = function () {
 
 stage.add(layerOfMenu);
 stage.add(layerOfGame);
+stage.add(layerEndGame)
